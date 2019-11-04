@@ -1,0 +1,22 @@
+{
+  "name": "vanilla-butter",
+  "version": "1.0.0",
+  "description": "We are Vanilla Butter Timer!",
+  "main": "index.js",
+  "scripts": {
+    "test": "melted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2019-Fall-Cohort/admin-front-end-butter-time.git"
+  },
+  "keywords": [
+    "butter"
+  ],
+  "author": "Butter Time",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/2019-Fall-Cohort/admin-front-end-butter-time/issues"
+  },
+  "homepage": "https://github.com/2019-Fall-Cohort/admin-front-end-butter-time#readme"
+}
