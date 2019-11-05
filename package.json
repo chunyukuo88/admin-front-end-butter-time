@@ -4,7 +4,7 @@
   "description": "We are Vanilla Butter Timer!",
   "main": "index.js",
   "scripts": {
-    "test": "melted"
+    "start": "webpack-dev-server --mode development --content-base docs/ --open --hot"
   },
   "repository": {
     "type": "git",
