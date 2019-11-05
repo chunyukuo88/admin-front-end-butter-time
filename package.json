@@ -18,5 +18,10 @@
   "bugs": {
     "url": "https://github.com/2019-Fall-Cohort/admin-front-end-butter-time/issues"
   },
-  "homepage": "https://github.com/2019-Fall-Cohort/admin-front-end-butter-time#readme"
+  "homepage": "https://github.com/2019-Fall-Cohort/admin-front-end-butter-time#readme",
+  "dependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  }
 }
