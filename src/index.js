@@ -6,7 +6,13 @@ const template = '<h1>Butter Records</h1>';
 render(template, document.querySelector('#app'));
 
 
+// function makeAButton() {
+//   let aButton = document.createElement("button");
+//   document.body.appendChild(button);
+// }
 
+
+// makeAButton();
 
 
 
