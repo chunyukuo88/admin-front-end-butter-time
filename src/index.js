@@ -1,36 +1,13 @@
-const render = function(template, node) {
-  node.innerHTML = template;
+import { create } from "domain";
+
+const render = function(element) {
+const createdElement = document.createElement("H1");
+createdElement.innerHTML ="Butter Records";
+element.append(createdElement);
+const button= document.createElement("button");
+button.innerHTML ="Albums";
+element.append(button);
 }
 
-const template = '<h1>Butter Records</h1>';
-render(template, document.querySelector('#app'));
+render(document.querySelector('#app'));
 
-
-// function makeAButton() {
-//   let aButton = document.createElement("button");
-//   document.body.appendChild(button);
-// }
-
-
-// makeAButton();
-
-
-
-
-// render(create("header", create("h1", "Smooth as Butter: Fine Music")), entry);
-
-// function render(child, parent) {
-//     parent.append(child);
-//   }
-  
-//   function create(element, content) {
-//     const createdElement = document.createElement(element);
-  
-//     if (content instanceof String) {
-//       createdElement.innerHTML = content;
-//     } else {
-//       createdElement.append(content);
-//     }
-  
-//     return createdElement;
-//   }
