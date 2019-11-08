@@ -1,4 +1,5 @@
 import { create } from "domain";
+import { stringify } from "querystring";
 
 const render = element => {
     const createdElement = document.createElement("H2");
@@ -37,8 +38,12 @@ const render = element => {
     function renderAlbums() {
         document.getElementsByTagName("p")[0].innerHTML = "Here are some albums:";
         fetch("http://localhost:8080/api/albums")
-            .then(res => res.json())
-            .then(data => console.log(data))
+            .then(res => res.text())
+            .then(function (data) {
+                const albumResult = document.createElement("article");
+                albumResult.innerHTML = data;
+                element.append(albumResult);
+            })
     }
 
     function renderArtists() {
