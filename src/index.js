@@ -43,10 +43,16 @@ const render = element => {
 
     function renderArtists() {
         document.getElementsByTagName("p")[0].innerHTML = "Here are some artists:";
+        fetch("http://localhost:8080/api/albums")
+        .then(res => res.json())
+        .then(data => console.log(data))
     }
 
     function renderSongs() {
         document.getElementsByTagName("p")[0].innerHTML = "Here are some songs:";
+        fetch("http://localhost:8080/api/albums")
+        .then(res => res.json())
+        .then(data => console.log(data))
     }
 
     
