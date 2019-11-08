@@ -14,7 +14,8 @@ const render = element => {
     element.append(artistsButton);
     
     const songsButton = document.createElement("button");
-    songsButton.innerHTML ="Songs";
+    songsButton.innerHTML = "Songs";
+    songsButton.classList = "song-button";
     element.append(songsButton);
 
     const textSpace = document.createElement("p");
@@ -30,8 +31,8 @@ const render = element => {
         function2();
     };
     
-    document.getElementsByTagName("button")[2].onclick = () => {
-        function3();
+    document.querySelector(".song-button").onclick = () => {
+        renderSongs();
     };
 
     function function1() {
@@ -55,12 +56,39 @@ const render = element => {
         document.getElementsByTagName("p")[0].innerHTML = "Here are some artists:";
     }
 
-    function function3() {
+    
+   
+
+    function renderSongs() {
         document.getElementsByTagName("p")[0].innerHTML = "Here are some songs:";
+
+        const app = document.querySelector("#app");
+        app.append(document.createElement("input"));
+
+        const addSongButton = document.createElement("button");
+        addSongButton.innerHTML = "Add Song";
+        addSongButton.classList = "add-song-button";
+        element.append(addSongButton);
+
+        fetch(`http://localhost:8081/api/songs/`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ title: cohortTitle })
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(cohort => {
+        console.log(cohort);
+      });
+  }
+
     }
 
     
-}
+
     
 
 render(document.querySelector('#app'));
