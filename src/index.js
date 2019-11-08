@@ -1,7 +1,7 @@
 import { create } from "domain";
 
 const render = element => {
-    const createdElement = document.createElement("marquee");
+    const createdElement = document.createElement("H2");
     createdElement.innerHTML ="Butter Records";
     element.append(createdElement);
 
@@ -23,18 +23,18 @@ const render = element => {
 
 
     document.getElementsByTagName("button")[0].onclick = () => {
-        function1();
+        renderAlbums();
     };
 
     document.getElementsByTagName("button")[1].onclick = () => {
-        function2();
+        renderArtists();
     };
     
     document.getElementsByTagName("button")[2].onclick = () => {
-        function3();
+        renderSongs();
     };
 
-    function function1() {
+    function renderAlbums() {
         document.getElementsByTagName("p")[0].innerHTML = "Here are some albums:";
         fetch("http://localhost:8080/api/albums", {
             method: "GET",
@@ -51,11 +51,11 @@ const render = element => {
             .then(data => console.log(data))
     }
 
-    function function2() {
+    function renderArtists() {
         document.getElementsByTagName("p")[0].innerHTML = "Here are some artists:";
     }
 
-    function function3() {
+    function renderSongs() {
         document.getElementsByTagName("p")[0].innerHTML = "Here are some songs:";
     }
 
