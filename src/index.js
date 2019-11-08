@@ -1,4 +1,5 @@
 import { create } from "domain";
+import { stringify } from "querystring";
 
 const wrapper = document.querySelector(".wrapper");
 
@@ -63,33 +64,29 @@ const render = element => {
       //   console.log("in the loop!");
       // });
     
+
+    document.getElementsByTagName("button")[2].onclick = () => {
+        renderSongs();
+    };
+
+    function renderAlbums() {
+        document.getElementsByTagName("p")[0].innerHTML = "Here are some albums:";
+        fetch("http://localhost:8080/api/albums")
+            .then(res => res.text())
+            .then(function (data) {
+                const albumResult = document.createElement("article");
+                albumResult.innerHTML = data;
+                element.append(albumResult);
+            })
+    }
+
       // This doesn't work :-(
       songDataContainer.innerHTML = JSON.stringify(data.title);
       wrapper.append(songDataContainer);
 
+
     }
 
-    //     const app = document.querySelector("#app");
-    //     app.append(document.createElement("input"));
-
-    //     const addSongButton = document.createElement("button");
-    //     addSongButton.innerHTML = "Add Song";
-    //     addSongButton.classList = "add-song-button";
-    //     element.append(addSongButton);
-
-    //     fetch(`http://localhost:8081/api/songs/`, {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application/json"
-    //     },
-    //     body: JSON.stringify({ title: cohortTitle })
-    // })
-    //   .then(response => {
-    //     return response.json();
-    //   })
-    //   .then(cohort => {
-    //     console.log(cohort);
-    //   });
   }
 
 }
