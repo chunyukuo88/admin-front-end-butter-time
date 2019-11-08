@@ -1,36 +1,70 @@
 import { create } from "domain";
 import { stringify } from "querystring";
 
+const wrapper = document.querySelector(".wrapper");
+
 const render = element => {
-    const createdElement = document.createElement("H2");
-    createdElement.innerHTML ="Butter Records";
-    element.append(createdElement);
+  const createdElement = document.createElement("H2");
+  createdElement.innerHTML = "Butter Records";
+  element.append(createdElement);
 
-    const albumsButton= document.createElement("button");
-    albumsButton.innerHTML ="Albums";
-    element.append(albumsButton);
+  const albumsButton = document.createElement("button");
+  albumsButton.innerHTML = "Albums";
+  element.append(albumsButton);
 
-    const artistsButton = document.createElement("button");
-    artistsButton.innerHTML ="Artists";
-    element.append(artistsButton);
+  const artistsButton = document.createElement("button");
+  artistsButton.innerHTML = "Artists";
+  element.append(artistsButton);
+
+  const songsButton = document.createElement("button");
+  songsButton.innerHTML = "Songs";
+  songsButton.classList = "song-button";
+  element.append(songsButton);
+
+  const textSpace = document.createElement("p");
+  textSpace.innerHTML = "Plz cleck teh boton";
+  element.append(textSpace);
+
+
+  document.getElementsByTagName("button")[0].onclick = () => {
+    renderAlbums();
+  };
+
+  document.getElementsByTagName("button")[1].onclick = () => {
+    renderArtists();
+  };
+
+  document.querySelector(".song-button").onclick = () => {
+    renderSongs();
+  };
+
+  function renderAlbums() {
+    document.getElementsByTagName("p")[0].innerHTML = "Here are some albums:";
+    fetch("http://localhost:8080/api/albums")
+      .then(res => res.json())
+      .then(data => console.log(data))
+  }
+
+  function renderArtists() {
+    document.getElementsByTagName("p")[0].innerHTML = "Here are some artists:";
+  }
+
+  function renderSongs() {
+    document.getElementsByTagName("p")[0].innerHTML = "Here are some songs:";
+    fetch("http://localhost:8080/api/songs")    
+      .then(response => response.json())
+      .then(data => displaySongData(data));
+
+    function displaySongData(data) {      
+      console.log(data);
+      console.log(data.toString());
+      const songDataContainer = document.createElement("div");
+      
+      // json.response.forEach(song => {
+      //   console.log("in the loop!");
+      // });
     
-    const songsButton = document.createElement("button");
-    songsButton.innerHTML ="Songs";
-    element.append(songsButton);
 
-    const textSpace = document.createElement("p");
-    textSpace.innerHTML ="Plz cleck teh boton";
-    element.append(textSpace);
-
-
-    document.getElementsByTagName("button")[0].onclick = () => {
-        renderAlbums();
-    };
-
-    document.getElementsByTagName("button")[1].onclick = () => {
-        renderArtists();
-    };
-    
     document.getElementsByTagName("button")[2].onclick = () => {
         renderSongs();
     };
@@ -46,16 +80,19 @@ const render = element => {
             })
     }
 
-    function renderArtists() {
-        document.getElementsByTagName("p")[0].innerHTML = "Here are some artists:";
+      // This doesn't work :-(
+      songDataContainer.innerHTML = JSON.stringify(data.title);
+      wrapper.append(songDataContainer);
+
+
     }
 
-    function renderSongs() {
-        document.getElementsByTagName("p")[0].innerHTML = "Here are some songs:";
-    }
+  }
 
-    
 }
-    
+
+
+
+
 
 render(document.querySelector('#app'));
