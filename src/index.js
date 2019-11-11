@@ -42,7 +42,16 @@ const render = element => {
             const albumResult = document.createElement("article");
             albumResult.innerHTML = JSON.stringify(data);
             element.append(albumResult);
-        })
+            
+                    for (let index = 0; index < data.length; index++) {
+                      const albumTitle = document.createElement("article");
+                      albumTitle.innerHTML = data[index].title;
+                      element.append(albumTitle);
+                      const albumArtist = document.createElement("article");
+                      albumArtist.innerHTML = data[index].artist;
+                      element.append(albumArtist);
+                    }
+              })
     }
 
     function renderArtists() {
@@ -50,9 +59,14 @@ const render = element => {
         fetch("http://localhost:8080/api/artists")
           .then(res => res.json())
           .then(function (data) {
-            const artistResult = document.createElement("article");
-            artistResult.innerHTML = JSON.stringify(data);
-            element.append(artistResult);
+             
+           
+            for (let index = 0; index < data.length; index++) {
+                 const artistName = document.createElement("article");
+                artistName.innerHTML = data[index].name;
+                element.append(artistName);
+            }
+            
         })
     }
 
@@ -67,7 +81,8 @@ const render = element => {
         })
     }
 
-    
+  
+
 }
     
 
