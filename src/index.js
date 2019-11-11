@@ -58,6 +58,29 @@ const render = element => {
     })
 }
 
+function renderSongs() {
+  document.getElementsByTagName("p")[0].innerHTML = "Here are some songs:";
+  fetch("http://localhost:8080/api/songs")
+    .then(res => res.json())
+    .then(function (data) {
+
+      for (let index = 0; index < data.length; index++) {
+        const songName = document.createElement("article");
+        songName.innerHTML = data[index].title;
+        element.append(songName);
+        
+        const albumName = document.createElement("article");
+        albumName.innerHTML = data[index].album;
+        element.append(albumName);
+
+        const songDuration = document.createElement("article");
+        songDuration.innerHTML = data[index].duration;
+        element.append(songDuration);
+      }
+
+  })
+}
+
   function renderArtists() {
     document.getElementsByTagName("p")[0].innerHTML = "Here are some artists:";
     fetch("http://localhost:8080/api/artists")
