@@ -42,8 +42,12 @@ const render = element => {
     document.getElementsByTagName("p")[0].innerHTML = "Here are some albums:";
     fetch("http://localhost:8080/api/albums")
       .then(res => res.json())
-      .then(data => console.log(data))
-  }
+      .then(function (data) {
+        const albumResult = document.createElement("article");
+        albumResult.innerHTML = JSON.stringify(data);
+        element.append(albumResult);
+    })
+}
 
   function renderArtists() {
     document.getElementsByTagName("p")[0].innerHTML = "Here are some artists:";
@@ -60,25 +64,10 @@ const render = element => {
       console.log(data.toString());
       const songDataContainer = document.createElement("div");
       
-      // json.response.forEach(song => {
-      //   console.log("in the loop!");
-      // });
-    
-
+   
     document.getElementsByTagName("button")[2].onclick = () => {
         renderSongs();
     };
-
-    function renderAlbums() {
-        document.getElementsByTagName("p")[0].innerHTML = "Here are some albums:";
-        fetch("http://localhost:8080/api/albums")
-            .then(res => res.text())
-            .then(function (data) {
-                const albumResult = document.createElement("article");
-                albumResult.innerHTML = data;
-                element.append(albumResult);
-            })
-    }
 
       // This doesn't work :-(
       songDataContainer.innerHTML = JSON.stringify(data.title);
