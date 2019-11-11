@@ -89,17 +89,21 @@ function renderSongs() {
   })
 }
 
-  function renderArtists() {
-    document.getElementsByTagName("p")[0].innerHTML = "Here are some artists:";
-    fetch("http://localhost:8080/api/artists")
+function renderArtists() {
+  document.getElementsByTagName("p")[0].innerHTML = "Here are some artist:";
+  fetch("http://localhost:8080/api/artists")
     .then(res => res.json())
     .then(function (data) {
-      const artistResult = document.createElement("article");
-      artistResult.innerHTML = JSON.stringify(data);
-      element.append(artistResult);
+      for (let index = 0; index < data.length; index++) {
+           const artistName = document.createElement("article");
+          artistName.innerHTML = data[index].name;
+          element.append(artistName);
+      }
   })
 }
 
 }
+
+
 
 render(document.querySelector('#app'));
