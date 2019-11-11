@@ -56,7 +56,7 @@ const render = element => {
   function renderSongs() {
     document.getElementsByTagName("p")[0].innerHTML = "Here are some songs:";
     fetch("http://localhost:8080/api/songs")    
-      .then(response => response.json())
+      .then(res => res.json())
       .then(data => displaySongData(data));
 
     function displaySongData(data) {      
