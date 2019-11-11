@@ -45,8 +45,11 @@ const render = element => {
     fetch("http://localhost:8080/api/albums")
       .then(res => res.json())
       .then(function (data) {
-
+        console.log(data);
         for (let index = 0; index < data.length; index++) {
+          
+          
+          
           const albumTitle = document.createElement("article");
           albumTitle.innerHTML = data[index].title;
           element.append(albumTitle);
@@ -54,6 +57,10 @@ const render = element => {
           const albumArtist = document.createElement("article");
           albumArtist.innerHTML = data[index].artist;
           element.append(albumArtist);
+
+          const albumId = document.createElement("article");
+          albumId.innerHTML = data[index].id;
+          element.append(albumId);
         }
 
     })
