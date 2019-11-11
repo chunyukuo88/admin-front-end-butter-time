@@ -37,22 +37,34 @@ const render = element => {
     function renderAlbums() {
         document.getElementsByTagName("p")[0].innerHTML = "Here are some albums:";
         fetch("http://localhost:8080/api/albums")
-            .then(res => res.json())
-            .then(data => console.log(data))
+          .then(res => res.json())
+          .then(function (data) {
+            const albumResult = document.createElement("article");
+            albumResult.innerHTML = JSON.stringify(data);
+            element.append(albumResult);
+        })
     }
 
     function renderArtists() {
-        document.getElementsByTagName("p")[0].innerHTML = "Here are some artists:";
-        fetch("http://localhost:8080/api/albums")
-        .then(res => res.json())
-        .then(data => console.log(data))
+        document.getElementsByTagName("p")[0].innerHTML = "Here are some artist:";
+        fetch("http://localhost:8080/api/artists")
+          .then(res => res.json())
+          .then(function (data) {
+            const artistResult = document.createElement("article");
+            artistResult.innerHTML = JSON.stringify(data);
+            element.append(artistResult);
+        })
     }
 
     function renderSongs() {
         document.getElementsByTagName("p")[0].innerHTML = "Here are some songs:";
-        fetch("http://localhost:8080/api/albums")
-        .then(res => res.json())
-        .then(data => console.log(data))
+        fetch("http://localhost:8080/api/songs")
+          .then(res => res.json())
+          .then(function (data) {
+            const songsResult = document.createElement("article");
+            songsResult.innerHTML = JSON.stringify(data);
+            element.append(songsResult);
+        })
     }
 
     
