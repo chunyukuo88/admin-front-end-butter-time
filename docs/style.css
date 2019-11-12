@@ -37,6 +37,14 @@ button:hover {
   flex-direction: column;
   justify-content: stretch;
   margin: 1rem;
+  margin-right: 20rem;
+}
+
+.content-container-wrapper {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 .content-record {
@@ -60,6 +68,14 @@ button:hover {
 
 .content-record-item-name a:hover {
     color: var(--butter);
+}
+
+.form-artist__label {
+  font-family: var(--page_title);
+}
+
+.form-artist__input {
+  font-family: var(--record_content);
 }
 
 h2 {
