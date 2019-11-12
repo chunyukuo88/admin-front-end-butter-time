@@ -9,7 +9,7 @@ wrapper.append(createdElement);
 elements.createButtons();
 
 const textSpace = document.createElement("p");
-textSpace.innerHTML = "Plz cleck teh boton";
+textSpace.innerHTML = "Welcome!";
 textSpace.classList.add("page-title");
 wrapper.append(textSpace);
 
