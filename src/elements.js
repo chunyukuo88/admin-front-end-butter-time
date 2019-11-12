@@ -40,6 +40,8 @@ module.exports = {
         textSpace.textContent = "Here are some artists:";
         const contentContainer = document.querySelector(".content-container");
         contentContainer.innerHTML = "";
+        const formContainer = document.querySelector(".form-container");
+        formContainer.innerHTML = ""; 
         fetch("http://localhost:8080/api/artists")
             .then(res => res.json())
             .then(function (data) {
@@ -58,6 +60,9 @@ module.exports = {
 
                 }
             })
+
+            this.addArtistForm();
+
         },
 
     renderAlbumsOfArtistsById(){
@@ -75,6 +80,7 @@ module.exports = {
 
             })
 
+
     },
 
     renderAlbums() {
@@ -82,6 +88,8 @@ module.exports = {
         textSpace.innerHTML = "Here are some albums:";
         const contentContainer = document.querySelector(".content-container");
         contentContainer.innerHTML = "";
+        const formContainer = document.querySelector(".form-container");
+        formContainer.innerHTML = ""; 
         fetch("http://localhost:8080/api/albums")
             .then(res => res.json())
             .then(function (data) {
@@ -118,6 +126,8 @@ module.exports = {
         textSpace.innerHTML = "Here are some songs:";
         const contentContainer = document.querySelector(".content-container");
         contentContainer.innerHTML = "";
+        const formContainer = document.querySelector(".form-container");
+        formContainer.innerHTML = "";        
         fetch("http://localhost:8080/api/songs")
             .then(res => res.json())
             .then(function (data) {
@@ -157,6 +167,35 @@ module.exports = {
     deleteEntity(){
         const contentContainer = document.querySelector(".content-record");
         contentContainer.remove();
+    },
+
+    addArtistForm() {
+        const formContainer = document.querySelector(".form-container");
+        const form = document.createElement("Form");
+        form.classList.add("form-artist");
+
+        const artistNameLabel = document.createElement("Label");
+        artistNameLabel.classList.add("form-artist__label");
+        artistNameLabel.textContent = "Artist Name: ";
+        form.append(artistNameLabel);
+
+        const artistNameInput = document.createElement("Input");
+        artistNameInput.classList.add("form-artist__input");
+        form.append(artistNameInput);
+
+        const addArtistButton = document.createElement("button");
+        addArtistButton.innerHTML = "Add Artist";
+        addArtistButton.classList.add("nav-button");
+        addArtistButton.classList.add("add-artist-button");
+        form.append(addArtistButton);
+        formContainer.append(form);
+
+        addArtistButton.onclick = (event) => {
+            event.preventDefault();
+            const artistName = document.querySelector(".form-artist__input").value;
+            console.log(artistName);
+        }
+        
     }
 
 
