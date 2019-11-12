@@ -3,7 +3,7 @@ const wrapper = document.querySelector(".wrapper");
 module.exports = {
 
     createButtons() {
-        var buttons = ['Artists', 'Albums', 'Songs'];
+        var buttons = ['Artists', 'Albums', 'Songs', 'Delete'];
         buttons.forEach(function (button) {
             const buttonLowerCase = button.toLowerCase();
             const buttonElement = document.createElement("button");
@@ -11,11 +11,6 @@ module.exports = {
             buttonElement.classList.add("nav-button");
             buttonElement.classList.add(buttonLowerCase + "-button");
             wrapper.append(buttonElement);
-            // buttonElement.onclick = () => {
-            //     const renderData = "render" + button + "()";
-            //     console.log(renderData);
-            //     window[renderData];
-            // }
         });
         this.addButtonOnclicks();
     },
@@ -32,6 +27,10 @@ module.exports = {
         const songsButtonElement = document.querySelector(".songs-button");
         songsButtonElement.onclick = () => {
             this.renderSongs();
+        }
+        const deleteButtonElement = document.querySelector(".delete-button");
+        deleteButtonElement.onclick = () => {
+            this.deleteEntity();
         }
     },
 
@@ -135,6 +134,11 @@ module.exports = {
                 }
 
             })
+    },
+
+    deleteEntity(){
+        const contentContainer = document.querySelector(".content-record");
+        contentContainer.remove();
     }
 
 
