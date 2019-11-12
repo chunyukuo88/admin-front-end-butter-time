@@ -19,6 +19,7 @@ module.exports = {
         const artistsButtonElement = document.querySelector(".artists-button");
         artistsButtonElement.onclick = () => {
             this.renderArtists();
+            this.renderAlbumsOfArtistsById();
         }
         const albumsButtonElement = document.querySelector(".albums-button");
         albumsButtonElement.onclick = () => {
@@ -54,7 +55,24 @@ module.exports = {
                     contentRecord.append(artistName);
 
                     contentContainer.append(contentRecord);
+
                 }
+            })
+        },
+
+    renderAlbumsOfArtistsById(){
+            fetch("http://localhost:8080/api/artists/{id}/albums")
+            .then(res => res.json())
+            .then(function (data){
+                
+                const contentRecord2 = document.createElement("div");
+                contentRecord2.classList.add("content-record-2");
+
+                const albumsOfArtist = document.createElement("ul");
+                albumsOfArtist.innerHTML = data.albums;
+                albumsOfArtist.classList.add("list-of-albums-of-artist");
+                contentRecord2.append(albumsOfArtist);
+
             })
 
     },
