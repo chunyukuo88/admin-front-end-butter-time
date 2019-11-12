@@ -1,5 +1,8 @@
-import { create } from "domain";
-import { stringify } from "querystring";
+// const Deact = require("deact");
+const elements = require("./elements");
+
+// import { create } from "domain";
+// import { stringify } from "querystring";
 
 
 const wrapper = document.querySelector(".wrapper");
@@ -7,20 +10,27 @@ const wrapper = document.querySelector(".wrapper");
 const render = element => {
 
   const createdElement = document.createElement("H2");
-  createdElement.innerHTML = "Butter Records";
+  createdElement.innerHTML = "Butter Records";  
   element.append(createdElement);
-
-  const albumsButton = document.createElement("button");
-  albumsButton.innerHTML = "Albums";
-  element.append(albumsButton);
 
   const artistsButton = document.createElement("button");
   artistsButton.innerHTML = "Artists";
+  createdElement.classList.add("album-button");
+  createdElement.classList.add("nav-button");
   element.append(artistsButton);
+
+  const albumsButton = document.createElement("button");
+  albumsButton.innerHTML = "Albums";
+  createdElement.classList.add("album-button");
+  createdElement.classList.add("nav-button");
+  element.append(albumsButton);
+
+  
 
   const songsButton = document.createElement("button");
   songsButton.innerHTML = "Songs";
   songsButton.classList = "song-button";
+  createdElement.classList.add("nav-button");
   element.append(songsButton);
 
   const textSpace = document.createElement("p");
@@ -107,3 +117,4 @@ function renderArtists() {
 
 
 render(document.querySelector('#app'));
+elements.createButtons();
