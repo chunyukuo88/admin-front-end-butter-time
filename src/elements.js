@@ -1,0 +1,141 @@
+const wrapper = document.querySelector(".wrapper");
+
+module.exports = {
+
+    createButtons() {
+        var buttons = ['Artists', 'Albums', 'Songs'];
+        buttons.forEach(function (button) {
+            const buttonLowerCase = button.toLowerCase();
+            const buttonElement = document.createElement("button");
+            buttonElement.innerHTML = button;
+            buttonElement.classList.add("nav-button");
+            buttonElement.classList.add(buttonLowerCase + "-button");
+            wrapper.append(buttonElement);
+            // buttonElement.onclick = () => {
+            //     const renderData = "render" + button + "()";
+            //     console.log(renderData);
+            //     window[renderData];
+            // }
+        });
+        this.addButtonOnclicks();
+    },
+
+    addButtonOnclicks() {
+        const artistsButtonElement = document.querySelector(".artists-button");
+        artistsButtonElement.onclick = () => {
+            this.renderArtists();
+        }
+        const albumsButtonElement = document.querySelector(".albums-button");
+        albumsButtonElement.onclick = () => {
+            this.renderAlbums();
+        }
+        const songsButtonElement = document.querySelector(".songs-button");
+        songsButtonElement.onclick = () => {
+            this.renderSongs();
+        }
+    },
+
+    renderArtists() {
+        const textSpace = document.querySelector(".page-title");
+        textSpace.textContent = "Here are some artists:";
+        const contentContainer = document.querySelector(".content-container");
+        contentContainer.innerHTML = "";
+        fetch("http://localhost:8080/api/artists")
+            .then(res => res.json())
+            .then(function (data) {
+                for (let index = 0; index < data.length; index++) {
+
+                    const contentRecord = document.createElement("div");
+                    contentRecord.classList.add("content-record");
+
+                    const artistName = document.createElement("article");                    
+                    artistName.innerHTML = data[index].name;
+                    artistName.classList.add("content-record-item");
+                    artistName.classList.add("content-record-item-name");
+                    contentRecord.append(artistName);
+
+                    contentContainer.append(contentRecord);
+                }
+            })
+
+    },
+
+    renderAlbums() {
+        const textSpace = document.querySelector(".page-title");
+        textSpace.innerHTML = "Here are some albums:";
+        const contentContainer = document.querySelector(".content-container");
+        contentContainer.innerHTML = "";
+        fetch("http://localhost:8080/api/albums")
+            .then(res => res.json())
+            .then(function (data) {
+                console.log(data);
+                for (let index = 0; index < data.length; index++) {
+
+                    const contentRecord = document.createElement("div");
+                    contentRecord.classList.add("content-record");
+
+                    const albumTitle = document.createElement("div");
+                    albumTitle.innerHTML = data[index].title;
+                    albumTitle.classList.add("content-record-item");
+                    albumTitle.classList.add("content-record-item-name");
+                    contentRecord.append(albumTitle);
+
+                    const albumArtist = document.createElement("div");
+                    albumArtist.innerHTML = data[index].artist;
+                    albumArtist.classList.add("content-record-item");
+                    contentRecord.append(albumArtist);
+
+                    const albumId = document.createElement("div");
+                    albumId.innerHTML = data[index].id;
+                    albumId.classList.add("content-record-item");
+                    contentRecord.append(albumId);
+
+                    contentContainer.append(contentRecord);
+                }
+
+            })
+    },
+
+    renderSongs() {
+        const textSpace = document.querySelector(".page-title");
+        textSpace.innerHTML = "Here are some songs:";
+        const contentContainer = document.querySelector(".content-container");
+        contentContainer.innerHTML = "";
+        fetch("http://localhost:8080/api/songs")
+            .then(res => res.json())
+            .then(function (data) {
+
+                for (let index = 0; index < data.length; index++) {
+
+                    const contentRecord = document.createElement("div");
+                    contentRecord.classList.add("content-record");
+
+                    const songName = document.createElement("div");  
+                    songName.classList.add("content-record-item");
+                    songName.classList.add("content-record-item-name");
+
+                    const songNameLink = document.createElement("a");
+                    songNameLink.href = "http://localhost:8080/api/songs/" + data[index].id;                  
+                    songNameLink.innerHTML = data[index].title;
+                    
+                    songName.append(songNameLink);
+                    contentRecord.append(songName);
+
+                    const albumName = document.createElement("div");
+                    albumName.innerHTML = data[index].album;
+                    albumName.classList.add("content-record-item");
+                    contentRecord.append(albumName);
+
+                    const songDuration = document.createElement("div");
+                    songDuration.innerHTML = data[index].duration;
+                    songDuration.classList.add("content-record-item");
+                    contentRecord.append(songDuration);
+
+                    contentContainer.append(contentRecord);
+                }
+
+            })
+    }
+
+
+}

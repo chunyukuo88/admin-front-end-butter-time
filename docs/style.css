@@ -1,4 +1,72 @@
-*
+@import url("https://fonts.googleapis.com/css?family=Bad+Script|Gloria+Hallelujah|Julius+Sans+One|Raleway:400,700|Yeon+Sung&display=swap");
+
+/* 
+font-family: 'Raleway', sans-serif;
+font-family: 'Julius Sans One', sans-serif;
+font-family: 'Gloria Hallelujah', cursive;
+font-family: 'Bad Script', cursive;
+font-family: 'Yeon Sung', cursive; 
+*/
+
 :root {
-    --butter: rgba(255, 251, 0, 0.972;
+  --butter: rgba(255, 251, 0, 0.972);
+  --dark: brown;
+  --page_header: "Gloria Hallelujah", cursive;
+  --page_title: "Julius Sans One", sans-serif;
+  --record_content: "Raleway", sans-serif;
+}
+
+.albums-button,
+.artists-button,
+.songs-button {
+}
+
+.content-container {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  margin: 1rem;
+}
+
+.content-record {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  font-family: var(--record_content);
+  justify-content: stretch;
+  padding: 0.2rem;
+}
+
+.content-record-item {
+  margin-right: .5rem;
+  padding: 0.1rem;
+}
+
+.content-record-item-name a {
+    color: var(--dark);
+    text-decoration: none;
+}
+
+.content-record-item-name a:hover {
+    color: var(--butter);
+}
+
+.nav-button {
+  font-family: var(--page_title);
+  margin: 1rem;
+  padding: 0.25rem;
+}
+
+.page-header {
+  font-family: var(--page_header);
+  margin: 1rem;
+}
+
+.page-title {
+  font-family: var(--page_header);
+  margin: 1rem;
+}
+
+.wrapper {
 }
