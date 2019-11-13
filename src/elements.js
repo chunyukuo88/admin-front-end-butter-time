@@ -142,29 +142,30 @@ module.exports = {
                     songName.classList.add("content-record-item-name");
 
                     const songNameLink = document.createElement("a");
-                    // songNameLink.href = "http://localhost:8080/api/songs/" + data[index].id;                  
                     songNameLink.href = "#";
                     songNameLink.onclick = (event) => {
                         event.preventDefault();
-                        const dropdown = document.createElement("div");
-                        dropdown.classList.add("dropdown__container");
+                        fetch("http://localhost:8080/api/songs/" + data[index].id)
+                            .then(res => res.json())
+                            .then(function (songData) {
+                                const dropdown = document.createElement("div");
+                                dropdown.classList.add("dropdown__container");
 
-                        const dataLabel = document.createElement("div");
-                        dataLabel.classList.add("dropdown__data-label");
-                        dataLabel.innerHTML = "Song Title: ";
-                        dropdown.append(dataLabel);
+                                const dataLabel = document.createElement("div");
+                                dataLabel.classList.add("dropdown__data-label");
+                                dataLabel.innerHTML = "Song Title: ";
+                                dropdown.append(dataLabel);
 
-                        const dataText = document.createElement("div");
-                        dataText.classList.add("dropdown__data-text");
-                        dataText.innerHTML = "Title Goes Here";
-                        dropdown.append(dataText);
-                        formContainer.append(dropdown);
-                    };
+                                const dataText = document.createElement("div");
+                                dataText.classList.add("dropdown__data-text");
+                                dataText.innerHTML = songData.title;
+                                dropdown.append(dataText);
+                                formContainer.append(dropdown);
+
+                            })
+                    }
+
                     songNameLink.innerHTML = data[index].title;
-
-                    // function myFunction() {
-                    //     document.getElementById("myDropdown").classList.toggle("show");
-                    //   }
 
                     songName.append(songNameLink);
                     contentRecord.append(songName);
