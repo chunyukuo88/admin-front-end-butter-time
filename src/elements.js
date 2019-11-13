@@ -41,7 +41,7 @@ module.exports = {
         const contentContainer = document.querySelector(".content-container");
         contentContainer.innerHTML = "";
         const formContainer = document.querySelector(".form-container");
-        formContainer.innerHTML = ""; 
+        formContainer.innerHTML = "";
         fetch("http://localhost:8080/api/artists")
             .then(res => res.json())
             .then(function (data) {
@@ -50,7 +50,7 @@ module.exports = {
                     const contentRecord = document.createElement("div");
                     contentRecord.classList.add("content-record");
 
-                    const artistName = document.createElement("article");                    
+                    const artistName = document.createElement("article");
                     artistName.innerHTML = data[index].name;
                     artistName.classList.add("content-record-item");
                     artistName.classList.add("content-record-item-name");
@@ -61,15 +61,15 @@ module.exports = {
                 }
             })
 
-            this.addArtistForm();
+        this.addArtistForm();
 
-        },
+    },
 
-    renderAlbumsOfArtistsById(){
-            fetch("http://localhost:8080/api/artists/{id}/albums")
+    renderAlbumsOfArtistsById() {
+        fetch("http://localhost:8080/api/artists/{id}/albums")
             .then(res => res.json())
-            .then(function (data){
-                
+            .then(function (data) {
+
                 const contentRecord2 = document.createElement("div");
                 contentRecord2.classList.add("content-record-2");
 
@@ -89,7 +89,7 @@ module.exports = {
         const contentContainer = document.querySelector(".content-container");
         contentContainer.innerHTML = "";
         const formContainer = document.querySelector(".form-container");
-        formContainer.innerHTML = ""; 
+        formContainer.innerHTML = "";
         fetch("http://localhost:8080/api/albums")
             .then(res => res.json())
             .then(function (data) {
@@ -127,7 +127,7 @@ module.exports = {
         const contentContainer = document.querySelector(".content-container");
         contentContainer.innerHTML = "";
         const formContainer = document.querySelector(".form-container");
-        formContainer.innerHTML = "";        
+        formContainer.innerHTML = "";
         fetch("http://localhost:8080/api/songs")
             .then(res => res.json())
             .then(function (data) {
@@ -137,14 +137,35 @@ module.exports = {
                     const contentRecord = document.createElement("div");
                     contentRecord.classList.add("content-record");
 
-                    const songName = document.createElement("div");  
+                    const songName = document.createElement("div");
                     songName.classList.add("content-record-item");
                     songName.classList.add("content-record-item-name");
 
                     const songNameLink = document.createElement("a");
-                    songNameLink.href = "http://localhost:8080/api/songs/" + data[index].id;                  
+                    // songNameLink.href = "http://localhost:8080/api/songs/" + data[index].id;                  
+                    songNameLink.href = "#";
+                    songNameLink.onclick = (event) => {
+                        event.preventDefault();
+                        const dropdown = document.createElement("div");
+                        dropdown.classList.add("dropdown__container");
+
+                        const dataLabel = document.createElement("div");
+                        dataLabel.classList.add("dropdown__data-label");
+                        dataLabel.innerHTML = "Song Title: ";
+                        dropdown.append(dataLabel);
+
+                        const dataText = document.createElement("div");
+                        dataText.classList.add("dropdown__data-text");
+                        dataText.innerHTML = "Title Goes Here";
+                        dropdown.append(dataText);
+                        formContainer.append(dropdown);
+                    };
                     songNameLink.innerHTML = data[index].title;
-                    
+
+                    // function myFunction() {
+                    //     document.getElementById("myDropdown").classList.toggle("show");
+                    //   }
+
                     songName.append(songNameLink);
                     contentRecord.append(songName);
 
@@ -164,7 +185,7 @@ module.exports = {
             })
     },
 
-    deleteEntity(){
+    deleteEntity() {
         const contentContainer = document.querySelector(".content-record");
         contentContainer.remove();
     },
@@ -195,8 +216,27 @@ module.exports = {
             const artistName = document.querySelector(".form-artist__input").value;
             console.log(artistName);
         }
-        
+
+    },
+
+    displayIndividualSongData(event) {
+        event.preventDefault();
+        const dropdown = document.createElement("div");
+        dropdown.classList.add("dropdown__container");
+
+        const dataLabel = document.createElement("div");
+        dataLabel.classList.add("dropdown__data-label");
+        dataLabel.innerHTML = "Song Title: ";
+        dropdown.append(dataLabel);
+
+        const dataText = document.createElement("div");
+        dataText.classList.add("dropdown__data-text");
+        dataText.innerHTML = "Title Goes Here";
+        dropdown.append(dataText);
+
     }
+
+
 
 
 }
