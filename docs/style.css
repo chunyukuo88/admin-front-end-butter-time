@@ -48,11 +48,11 @@ button:hover {
 }
 
 .content-record {
-  align-items: flex-start;
+  align-items: center;
   display: flex;
   flex-direction: row;
   font-family: var(--record_content);
-  justify-content: stretch;
+  justify-content: center;
   padding: 0.2rem;
 }
 
@@ -70,8 +70,25 @@ button:hover {
     color: var(--butter);
 }
 
+.dropdown__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;  
+  
+}
+
+.dropdown__data-label {
+  font-family: var(--page_header);
+  padding-right: 10px;
+}
+
+.dropdown__data-text {
+ font-family: var(--record_content);
+}
+
 .form-artist__label {
-  font-family: var(--page_title);
+  font-family: var(--page_header);
+  
 }
 
 .form-artist__input {
