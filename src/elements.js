@@ -35,14 +35,25 @@ module.exports = {
         }
     },
 
+
+// REFERENCE
+// contentRecord.classList.add("content-record");
+
+// const albumTitle = document.createElement("div");
+// albumTitle.innerHTML = data[index].title;
+// albumTitle.classList.add("content-record-item");
+// albumTitle.classList.add("content-record-item-name");
+// contentRecord.append(albumTitle);
+// REFERENCE
+
     renderArtists() {
         const textSpace = document.querySelector(".page-title");
         textSpace.textContent = "Here are some artists:";
         const contentContainer = document.querySelector(".content-container");
         contentContainer.innerHTML = "";
         const formContainer = document.querySelector(".form-container");
-        formContainer.innerHTML = "";
-        fetch("http://localhost:8080/api/artists")
+        formContainer.innerHTML = ""; 
+        fetch("http://localhost:8080/artists")
             .then(res => res.json())
             .then(function (data) {
                 for (let index = 0; index < data.length; index++) {
@@ -58,6 +69,20 @@ module.exports = {
 
                     contentContainer.append(contentRecord);
 
+                    const albumsOfArtist = document.createElement("div");
+
+                    fetch("http://localhost:8080/artists/{id}/albums")
+                    .then(res => res.json())
+                    .then(function (data){
+
+                        // array1.forEach(function(element) {
+                        //     console.log(element);
+                        //   });
+                        albumsOfArtist.innerHTML = data.albums;
+                        albumsOfArtist.classList.add("list-of-albums-of-artist");
+                        contentRecord.append(albumsOfArtist);
+        
+                    })
                 }
             })
 
@@ -65,8 +90,13 @@ module.exports = {
 
     },
 
+<<<<<<< HEAD
     renderAlbumsOfArtistsById() {
         fetch("http://localhost:8080/api/artists/{id}/albums")
+=======
+    renderAlbumsOfArtistsById(){
+            fetch("http://localhost:8080/artists/{id}/albums")
+>>>>>>> dev
             .then(res => res.json())
             .then(function (data) {
 
@@ -89,14 +119,20 @@ module.exports = {
         const contentContainer = document.querySelector(".content-container");
         contentContainer.innerHTML = "";
         const formContainer = document.querySelector(".form-container");
+<<<<<<< HEAD
         formContainer.innerHTML = "";
         fetch("http://localhost:8080/api/albums")
+=======
+        formContainer.innerHTML = ""; 
+        fetch("http://localhost:8080/albums")
+>>>>>>> dev
             .then(res => res.json())
             .then(function (data) {
                 console.log(data);
                 for (let index = 0; index < data.length; index++) {
 
                     const contentRecord = document.createElement("div");
+                    // This is the container for the entire album:
                     contentRecord.classList.add("content-record");
 
                     const albumTitle = document.createElement("div");
@@ -127,8 +163,13 @@ module.exports = {
         const contentContainer = document.querySelector(".content-container");
         contentContainer.innerHTML = "";
         const formContainer = document.querySelector(".form-container");
+<<<<<<< HEAD
         formContainer.innerHTML = "";
         fetch("http://localhost:8080/api/songs")
+=======
+        formContainer.innerHTML = "";        
+        fetch("http://localhost:8080/songs")
+>>>>>>> dev
             .then(res => res.json())
             .then(function (data) {
 
@@ -142,6 +183,7 @@ module.exports = {
                     songName.classList.add("content-record-item-name");
 
                     const songNameLink = document.createElement("a");
+<<<<<<< HEAD
                     songNameLink.href = "#";
                     songNameLink.onclick = (event) => {
                         event.preventDefault();
@@ -165,6 +207,9 @@ module.exports = {
                             })
                     }
 
+=======
+                    songNameLink.href = "http://localhost:8080/songs/" + data[index].id;                  
+>>>>>>> dev
                     songNameLink.innerHTML = data[index].title;
 
                     songName.append(songNameLink);
