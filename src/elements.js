@@ -71,20 +71,23 @@ module.exports = {
 
                     const albumsOfArtist = document.createElement("div");
 
-                    fetch("http://localhost:8080/artists/{id}/albums")
+
+                    fetch("http://localhost:8080/artists/" + data[index].id + "/albums")
                         .then(res => res.json())
-                        .then(function (data) {
+                        .then(albums => {
+                            console.log(albums);
+                            albums.forEach( album => {
+                                albumOfArtist = document.createElement("div");
+                                albumOfArtist.classList.add("list-of-albums-of-artist");
+                                albumOfArtist.innerText = album.title;
+                                contentRecord.append(albumOfArtist);
+                            })
+                        }
+                        )
 
-                            // array1.forEach(function(element) {
-                            //     console.log(element);
-                            //   });
-                            albumsOfArtist.innerHTML = data.albums;
-                            albumsOfArtist.classList.add("list-of-albums-of-artist");
-                            contentRecord.append(albumsOfArtist);
-
-                        })
                 }
-            })
+            }
+            )
 
         this.addArtistForm();
 
@@ -147,27 +150,8 @@ module.exports = {
             })
     },
 
-    renderSongs() {
-        const textSpace = document.querySelector(".page-title");
-        textSpace.innerHTML = "Here are some songs:";
-        const contentContainer = document.querySelector(".content-container");
-        contentContainer.innerHTML = "";
-        const formContainer = document.querySelector(".form-container");
-        formContainer.innerHTML = "";
-        fetch("http://localhost:8080/songs")
-            .then(res => res.json())
-            .then(function (data) {
+    
 
-                for (let index = 0; index < data.length; index++) {
-
-                    const contentRecord = document.createElement("div");
-                    contentRecord.classList.add("content-record");
-
-                    const songName = document.createElement("div");
-                    songName.classList.add("content-record-item");
-                    songName.classList.add("content-record-item-name");
-
-                    const songNameLink = document.createElement("a");
                     songNameLink.href = "#";
                     songNameLink.onclick = (event) => {
                         event.preventDefault();
@@ -225,6 +209,7 @@ module.exports = {
                             })
                     }
 
+
                     songNameLink.href = "http://localhost:8080/songs/" + data[index].id;
                     songNameLink.innerHTML = data[index].title;
 
@@ -277,6 +262,8 @@ module.exports = {
             event.preventDefault();
             const artistName = document.querySelector(".form-artist__input").value;
             console.log(artistName);
+
+
 
 
 
