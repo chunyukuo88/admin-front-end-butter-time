@@ -36,15 +36,15 @@ module.exports = {
     },
 
 
-// REFERENCE
-// contentRecord.classList.add("content-record");
+    // REFERENCE
+    // contentRecord.classList.add("content-record");
 
-// const albumTitle = document.createElement("div");
-// albumTitle.innerHTML = data[index].title;
-// albumTitle.classList.add("content-record-item");
-// albumTitle.classList.add("content-record-item-name");
-// contentRecord.append(albumTitle);
-// REFERENCE
+    // const albumTitle = document.createElement("div");
+    // albumTitle.innerHTML = data[index].title;
+    // albumTitle.classList.add("content-record-item");
+    // albumTitle.classList.add("content-record-item-name");
+    // contentRecord.append(albumTitle);
+    // REFERENCE
 
     renderArtists() {
         const textSpace = document.querySelector(".page-title");
@@ -52,7 +52,7 @@ module.exports = {
         const contentContainer = document.querySelector(".content-container");
         contentContainer.innerHTML = "";
         const formContainer = document.querySelector(".form-container");
-        formContainer.innerHTML = ""; 
+        formContainer.innerHTML = "";
         fetch("http://localhost:8080/artists")
             .then(res => res.json())
             .then(function (data) {
@@ -61,7 +61,7 @@ module.exports = {
                     const contentRecord = document.createElement("div");
                     contentRecord.classList.add("content-record");
 
-                    const artistName = document.createElement("article");                    
+                    const artistName = document.createElement("article");
                     artistName.innerHTML = data[index].name;
                     artistName.classList.add("content-record-item");
                     artistName.classList.add("content-record-item-name");
@@ -72,29 +72,29 @@ module.exports = {
                     const albumsOfArtist = document.createElement("div");
 
                     fetch("http://localhost:8080/artists/{id}/albums")
-                    .then(res => res.json())
-                    .then(function (data){
+                        .then(res => res.json())
+                        .then(function (data) {
 
-                        // array1.forEach(function(element) {
-                        //     console.log(element);
-                        //   });
-                        albumsOfArtist.innerHTML = data.albums;
-                        albumsOfArtist.classList.add("list-of-albums-of-artist");
-                        contentRecord.append(albumsOfArtist);
-        
-                    })
+                            // array1.forEach(function(element) {
+                            //     console.log(element);
+                            //   });
+                            albumsOfArtist.innerHTML = data.albums;
+                            albumsOfArtist.classList.add("list-of-albums-of-artist");
+                            contentRecord.append(albumsOfArtist);
+
+                        })
                 }
             })
 
-            this.addArtistForm();
+        this.addArtistForm();
 
-        },
+    },
 
-    renderAlbumsOfArtistsById(){
-            fetch("http://localhost:8080/artists/{id}/albums")
+    renderAlbumsOfArtistsById() {
+        fetch("http://localhost:8080/artists/{id}/albums")
             .then(res => res.json())
-            .then(function (data){
-                
+            .then(function (data) {
+
                 const contentRecord2 = document.createElement("div");
                 contentRecord2.classList.add("content-record-2");
 
@@ -114,7 +114,7 @@ module.exports = {
         const contentContainer = document.querySelector(".content-container");
         contentContainer.innerHTML = "";
         const formContainer = document.querySelector(".form-container");
-        formContainer.innerHTML = ""; 
+        formContainer.innerHTML = "";
         fetch("http://localhost:8080/albums")
             .then(res => res.json())
             .then(function (data) {
@@ -153,7 +153,7 @@ module.exports = {
         const contentContainer = document.querySelector(".content-container");
         contentContainer.innerHTML = "";
         const formContainer = document.querySelector(".form-container");
-        formContainer.innerHTML = "";        
+        formContainer.innerHTML = "";
         fetch("http://localhost:8080/songs")
             .then(res => res.json())
             .then(function (data) {
@@ -163,26 +163,74 @@ module.exports = {
                     const contentRecord = document.createElement("div");
                     contentRecord.classList.add("content-record");
 
-                    const songName = document.createElement("div");  
+                    const songName = document.createElement("div");
                     songName.classList.add("content-record-item");
                     songName.classList.add("content-record-item-name");
 
                     const songNameLink = document.createElement("a");
-                    songNameLink.href = "http://localhost:8080/songs/" + data[index].id;                  
+                    songNameLink.href = "#";
+                    songNameLink.onclick = (event) => {
+                        event.preventDefault();
+                        fetch("http://localhost:8080/songs/" + data[index].id)
+                            .then(res => res.json())
+                            .then(function (songData) {
+                                formContainer.innerHTML = "";
+
+                                const dropdown = document.createElement("div");
+                                dropdown.classList.add("dropdown__container");
+
+                                const dataLabel = document.createElement("div");
+                                dataLabel.classList.add("dropdown__data-label");
+                                dataLabel.innerHTML = "Song Title: ";
+                                dropdown.append(dataLabel);
+
+                                const dataText = document.createElement("div");
+                                dataText.classList.add("dropdown__data-text");
+                                dataText.innerHTML = songData.title;
+                                dropdown.append(dataText);
+
+                                // Ablum object is saved in H2 but not returning from endpoint.
+                                // const dataLabelAlbum = document.createElement("div");
+                                // dataLabelAlbum.classList.add("dropdown__data-label");
+                                // dataLabelAlbum.innerHTML = "Album Title: ";
+                                // dropdown.append(dataLabelAlbum);
+
+                                // const dataTextAlbum = document.createElement("div");
+                                // dataTextAlbum.classList.add("dropdown__data-text");
+                                // console.log(songData);
+                                // // dataTextAlbum.innerHTML = songData.album.title;
+                                // dropdown.append(dataTextAlbum);
+                                // formContainer.append(dropdown);
+
+                                const dataLabelDuration = document.createElement("div");
+                                dataLabelDuration.classList.add("dropdown__data-label");
+                                dataLabelDuration.innerHTML = "Song Duration: ";
+                                dropdown.append(dataLabelDuration);
+
+                                const dataTextDuration = document.createElement("div");
+                                dataTextDuration.classList.add("dropdown__data-text");
+                                dataTextDuration.innerHTML = songData.duration + " seconds";
+                                dropdown.append(dataTextDuration);
+                                formContainer.append(dropdown);
+
+                            })
+                    }
+
+                    songNameLink.href = "http://localhost:8080/songs/" + data[index].id;
                     songNameLink.innerHTML = data[index].title;
-                    
+
                     songName.append(songNameLink);
                     contentRecord.append(songName);
 
-                    const albumName = document.createElement("div");
-                    albumName.innerHTML = data[index].album;
-                    albumName.classList.add("content-record-item");
-                    contentRecord.append(albumName);
+                    // const albumName = document.createElement("div");
+                    // albumName.innerHTML = data[index].album;
+                    // albumName.classList.add("content-record-item");
+                    // contentRecord.append(albumName);
 
-                    const songDuration = document.createElement("div");
-                    songDuration.innerHTML = data[index].duration;
-                    songDuration.classList.add("content-record-item");
-                    contentRecord.append(songDuration);
+                    // const songDuration = document.createElement("div");
+                    // songDuration.innerHTML = data[index].duration;
+                    // songDuration.classList.add("content-record-item");
+                    // contentRecord.append(songDuration);
 
                     contentContainer.append(contentRecord);
                 }
@@ -190,7 +238,7 @@ module.exports = {
             })
     },
 
-    deleteEntity(){
+    deleteEntity() {
         const contentContainer = document.querySelector(".content-record");
         contentContainer.remove();
     },
@@ -221,8 +269,27 @@ module.exports = {
             const artistName = document.querySelector(".form-artist__input").value;
             console.log(artistName);
         }
-        
+
+    },
+
+    displayIndividualSongData(event) {
+        event.preventDefault();
+        const dropdown = document.createElement("div");
+        dropdown.classList.add("dropdown__container");
+
+        const dataLabel = document.createElement("div");
+        dataLabel.classList.add("dropdown__data-label");
+        dataLabel.innerHTML = "Song Title: ";
+        dropdown.append(dataLabel);
+
+        const dataText = document.createElement("div");
+        dataText.classList.add("dropdown__data-text");
+        dataText.innerHTML = "Title Goes Here";
+        dropdown.append(dataText);
+
     }
+
+
 
 
 }
