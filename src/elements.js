@@ -179,15 +179,19 @@ module.exports = {
                                 const dropdown = document.createElement("div");
                                 dropdown.classList.add("dropdown__container");
 
+                                const dropdownRecord = document.createElement("div");
+                                dropdownRecord.classList.add("content-record");
+
                                 const dataLabel = document.createElement("div");
                                 dataLabel.classList.add("dropdown__data-label");
                                 dataLabel.innerHTML = "Song Title: ";
-                                dropdown.append(dataLabel);
+                                dropdownRecord.append(dataLabel);
 
                                 const dataText = document.createElement("div");
                                 dataText.classList.add("dropdown__data-text");
                                 dataText.innerHTML = songData.title;
-                                dropdown.append(dataText);
+                                dropdownRecord.append(dataText);
+                                dropdown.append(dropdownRecord);
 
                                 // Ablum object is saved in H2 but not returning from endpoint.
                                 // const dataLabelAlbum = document.createElement("div");
@@ -202,15 +206,20 @@ module.exports = {
                                 // dropdown.append(dataTextAlbum);
                                 // formContainer.append(dropdown);
 
+                                const dropdownRecordDuration = document.createElement("div");
+                                dropdownRecordDuration.classList.add("content-record");
+
                                 const dataLabelDuration = document.createElement("div");
                                 dataLabelDuration.classList.add("dropdown__data-label");
                                 dataLabelDuration.innerHTML = "Song Duration: ";
-                                dropdown.append(dataLabelDuration);
+                                dropdownRecordDuration.append(dataLabelDuration);
 
                                 const dataTextDuration = document.createElement("div");
                                 dataTextDuration.classList.add("dropdown__data-text");
                                 dataTextDuration.innerHTML = songData.duration + " seconds";
-                                dropdown.append(dataTextDuration);
+                                dropdownRecordDuration.append(dataTextDuration);
+                                dropdown.append(dropdownRecordDuration);
+
                                 formContainer.append(dropdown);
 
                             })
@@ -268,28 +277,27 @@ module.exports = {
             event.preventDefault();
             const artistName = document.querySelector(".form-artist__input").value;
             console.log(artistName);
+
+
+
+            fetch('http://localhost:8080/artists/' + artistName, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: name,
+                })
+            })
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                });
+
+            this.renderArtists();
+
         }
-
-    },
-
-    displayIndividualSongData(event) {
-        event.preventDefault();
-        const dropdown = document.createElement("div");
-        dropdown.classList.add("dropdown__container");
-
-        const dataLabel = document.createElement("div");
-        dataLabel.classList.add("dropdown__data-label");
-        dataLabel.innerHTML = "Song Title: ";
-        dropdown.append(dataLabel);
-
-        const dataText = document.createElement("div");
-        dataText.classList.add("dropdown__data-text");
-        dataText.innerHTML = "Title Goes Here";
-        dropdown.append(dataText);
-
     }
-
-
-
-
 }
