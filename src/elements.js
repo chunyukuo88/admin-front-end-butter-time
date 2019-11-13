@@ -35,6 +35,17 @@ module.exports = {
         }
     },
 
+
+// REFERENCE
+// contentRecord.classList.add("content-record");
+
+// const albumTitle = document.createElement("div");
+// albumTitle.innerHTML = data[index].title;
+// albumTitle.classList.add("content-record-item");
+// albumTitle.classList.add("content-record-item-name");
+// contentRecord.append(albumTitle);
+// REFERENCE
+
     renderArtists() {
         const textSpace = document.querySelector(".page-title");
         textSpace.textContent = "Here are some artists:";
@@ -42,7 +53,7 @@ module.exports = {
         contentContainer.innerHTML = "";
         const formContainer = document.querySelector(".form-container");
         formContainer.innerHTML = ""; 
-        fetch("http://localhost:8080/api/artists")
+        fetch("http://localhost:8080/artists")
             .then(res => res.json())
             .then(function (data) {
                 for (let index = 0; index < data.length; index++) {
@@ -58,6 +69,20 @@ module.exports = {
 
                     contentContainer.append(contentRecord);
 
+                    const albumsOfArtist = document.createElement("div");
+
+                    fetch("http://localhost:8080/artists/{id}/albums")
+                    .then(res => res.json())
+                    .then(function (data){
+
+                        // array1.forEach(function(element) {
+                        //     console.log(element);
+                        //   });
+                        albumsOfArtist.innerHTML = data.albums;
+                        albumsOfArtist.classList.add("list-of-albums-of-artist");
+                        contentRecord.append(albumsOfArtist);
+        
+                    })
                 }
             })
 
@@ -66,7 +91,7 @@ module.exports = {
         },
 
     renderAlbumsOfArtistsById(){
-            fetch("http://localhost:8080/api/artists/{id}/albums")
+            fetch("http://localhost:8080/artists/{id}/albums")
             .then(res => res.json())
             .then(function (data){
                 
@@ -90,13 +115,14 @@ module.exports = {
         contentContainer.innerHTML = "";
         const formContainer = document.querySelector(".form-container");
         formContainer.innerHTML = ""; 
-        fetch("http://localhost:8080/api/albums")
+        fetch("http://localhost:8080/albums")
             .then(res => res.json())
             .then(function (data) {
                 console.log(data);
                 for (let index = 0; index < data.length; index++) {
 
                     const contentRecord = document.createElement("div");
+                    // This is the container for the entire album:
                     contentRecord.classList.add("content-record");
 
                     const albumTitle = document.createElement("div");
@@ -128,7 +154,7 @@ module.exports = {
         contentContainer.innerHTML = "";
         const formContainer = document.querySelector(".form-container");
         formContainer.innerHTML = "";        
-        fetch("http://localhost:8080/api/songs")
+        fetch("http://localhost:8080/songs")
             .then(res => res.json())
             .then(function (data) {
 
@@ -142,7 +168,7 @@ module.exports = {
                     songName.classList.add("content-record-item-name");
 
                     const songNameLink = document.createElement("a");
-                    songNameLink.href = "http://localhost:8080/api/songs/" + data[index].id;                  
+                    songNameLink.href = "http://localhost:8080/songs/" + data[index].id;                  
                     songNameLink.innerHTML = data[index].title;
                     
                     songName.append(songNameLink);
