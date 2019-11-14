@@ -52,7 +52,7 @@ button:hover {
   display: flex;
   flex-direction: row;
   font-family: var(--record_content);
-  justify-content: center;
+  justify-content: flex-start;
   padding: 0.2rem;
 }
 
