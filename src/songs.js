@@ -198,7 +198,7 @@ module.exports = {
             console.log("Song Title: " + songTitle);
             console.log("Album Id: " + albumId);
 
-            fetch('http://localhost:8080/songs/' + albumId + "/" + songTitle + "/" + durationSeconds, {
+            fetch('http://localhost:8080/songs/add-song/' + albumId + "/" + songTitle + "/" + durationSeconds, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
