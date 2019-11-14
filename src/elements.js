@@ -10,7 +10,6 @@ module.exports = {
         buttonGrid.classList.add("button-grid");
         wrapper.append(buttonGrid);
 
-
         var buttons = ['Artists', 'Albums', 'Songs', 'Add', 'Delete'];
         buttons.forEach(function (button) {
             const buttonLowerCase = button.toLowerCase();
@@ -37,12 +36,21 @@ module.exports = {
         songsButtonElement.onclick = () => {
             songs.renderSongs();
         }
+
+        // const addButtonElement = document.querySelector(".add-button");
+        // songsButtonElement.onclick = () => {
+            // Surely Diana knows how to fix this!
+        // }
+
         const deleteButtonElement = document.querySelector(".delete-button");
         deleteButtonElement.onclick = () => {
-            this.deleteEntity();
+            let deleteConfirmation;
+            var confirmDeletion = confirm("Are you sure you want to delete the topmost entity?");
+            if (confirmDeletion == true) {
+                this.deleteEntity();
+            }
         }
     },
-
 
 
 
@@ -51,5 +59,6 @@ module.exports = {
         contentContainer.remove();
     }
 
+    
 
 }

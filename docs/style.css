@@ -21,14 +21,27 @@ font-family: 'Yeon Sung', cursive;
 .songs-button {
 }
 
+.add-button {
+  background-color: green;
+  color: white;
+}
+
+.add-button:hover {
+  background-color: rgba(0, 128, 0, 0.719);
+}
+
 button {
   background-color: yellow;
   border-radius: 5px;
+  -webkit-transition: -webkit-transform .8s ease-in-out;
+  transition:         transform .8s ease-in-out;
 }
 
 button:hover {
   background-color: rgb(253, 255, 109);  
   color: green;
+  -webkit-transform: rotate(12deg);
+  transform: rotate(12deg);
 }
 
 .button-grid {
@@ -74,6 +87,16 @@ button:hover {
 
 .content-record-item-name a:hover {
     color: var(--butter);
+}
+
+.delete-button {
+  background-color: red;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: rgba(255, 0, 0, 0.534);
+  color: white;
 }
 
 .dropdown__container {
