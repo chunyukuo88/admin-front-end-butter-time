@@ -86,16 +86,11 @@ button:hover {
  font-family: var(--record_content);
 }
 
-.form-artist__label,
-.form-album__label,
-.form-song__label {
+.form__label {
   font-family: var(--page_header);
 }
 
-.form-artist__input,
-.form-album__input,
-.form-song__input,
-.form-album__select {
+.form__data {
   font-family: var(--record_content);
 }
 

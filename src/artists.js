@@ -72,11 +72,13 @@ module.exports = {
 
         const artistNameLabel = document.createElement("Label");
         artistNameLabel.classList.add("form-artist__label");
+        artistNameLabel.classList.add("form__label");
         artistNameLabel.textContent = "Artist Name: ";
         form.append(artistNameLabel);
 
         const artistNameInput = document.createElement("Input");
         artistNameInput.classList.add("form-artist__input");
+        artistNameInput.classList.add("form__data");
         form.append(artistNameInput);
 
         const addArtistButton = document.createElement("button");

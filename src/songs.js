@@ -99,5 +99,126 @@ module.exports = {
                 }
 
             })
+        this.addSongForm();
+    },
+
+    addSongForm() {
+        const formContainer = document.querySelector(".form-container");
+        const form = document.createElement("Form");
+        form.classList.add("form-song");
+
+        const formFieldset = document.createElement("div");
+        formFieldset.classList.add(".form-fieldset");
+
+        const formFieldRow = document.createElement("div");
+        formFieldRow.classList.add(".form-field-row");
+
+        const nameLabel = document.createElement("Label");
+        nameLabel.classList.add("form-song__label");
+        nameLabel.classList.add("form__label");
+        nameLabel.textContent = "Song Title: ";
+        formFieldRow.append(nameLabel);
+
+        const titleInput = document.createElement("Input");
+        titleInput.classList.add("form-song__input");
+        titleInput.classList.add("form__data");
+        formFieldRow.append(titleInput);
+
+        formFieldset.append(formFieldRow);
+
+
+        const formFieldRow1 = document.createElement("div");
+        formFieldRow1.classList.add(".form-field-row");
+
+        const durationLabel = document.createElement("Label");
+        durationLabel.classList.add("form-song__label");
+        durationLabel.classList.add("form__label");
+        durationLabel.textContent = "Duration in Seconds: ";
+        formFieldRow1.append(durationLabel);
+
+        const durationInput = document.createElement("Input");
+        durationInput.type = "number";
+        durationInput.min = 0;
+        durationInput.value = 180;
+        durationInput.classList.add("form-song__input-duration");
+        durationInput.classList.add("form__data");
+        formFieldRow1.append(durationInput);
+
+        formFieldset.append(formFieldRow1);
+
+
+        const formFieldRow2 = document.createElement("div");
+        formFieldRow2.classList.add(".form-field-row");
+        const selectAlbumLabel = document.createElement("Label");
+        selectAlbumLabel.classList.add("form-song__label");
+        selectAlbumLabel.classList.add("form__label");
+        selectAlbumLabel.textContent = "Album: ";
+        formFieldRow2.append(selectAlbumLabel);
+
+        const selectAlbum = document.createElement("select");
+        selectAlbum.classList.add("form-song__select");
+        selectAlbum.classList.add("form__data");
+
+        fetch("http://localhost:8080/albums")
+            .then(res => res.json())
+            .then(function (data) {
+                for (let index = 0; index < data.length; index++) {
+
+                    const selectAlbumOption = document.createElement("option");
+                    selectAlbumOption.classList.add("form-song__select-option");
+                    selectAlbumOption.classList.add("form__data");
+                    selectAlbumOption.value = data[index].id;
+                    selectAlbumOption.textContent = data[index].title;
+                    selectAlbum.append(selectAlbumOption);
+                }
+            });
+
+        formFieldRow2.append(selectAlbum);
+        formFieldset.append(formFieldRow2);
+
+        const formFieldRow3 = document.createElement("div");
+        formFieldRow3.classList.add(".form-field-row");
+
+        const addSongButton = document.createElement("button");
+        addSongButton.innerHTML = "Add Song";
+        addSongButton.classList.add("nav-button");
+        addSongButton.classList.add("add-song-button");
+        formFieldRow3.append(addSongButton);
+        formFieldset.append(formFieldRow3);
+
+        form.append(formFieldset);
+        formContainer.append(form);
+
+        addSongButton.onclick = (event) => {
+            event.preventDefault();
+            const songTitle = document.querySelector(".form-song__input").value;
+            const albumId = document.querySelector(".form-song__select").value;
+            const durationSeconds = document.querySelector(".form-song__input-duration").value;
+
+            console.log("Song Title: " + songTitle);
+            console.log("Album Id: " + albumId);
+
+            fetch('http://localhost:8080/songs/' + albumId + "/" + songTitle + "/" + durationSeconds, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    albumId: albumId,
+                    songTitle: songTitle,
+                    songDuration: durationSeconds
+                })
+            })
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                });
+
+            this.renderSongs();
+
+        }
+
     }
 }

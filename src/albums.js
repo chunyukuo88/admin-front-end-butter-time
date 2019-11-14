@@ -54,11 +54,13 @@ module.exports = {
 
         const albumTitleLabel = document.createElement("Label");
         albumTitleLabel.classList.add("form-album__label");
+        albumTitleLabel.classList.add("form__label");
         albumTitleLabel.textContent = "Album Title: ";
         formFieldRow.append(albumTitleLabel);
 
         const albumTitleInput = document.createElement("Input");
         albumTitleInput.classList.add("form-album__input");
+        albumTitleInput.classList.add("form__data");
         formFieldRow.append(albumTitleInput);
 
         formFieldset.append(formFieldRow);
@@ -67,11 +69,13 @@ module.exports = {
         formFieldRow2.classList.add(".form-field-row");
         const selectArtistLabel = document.createElement("Label");
         selectArtistLabel.classList.add("form-album__label");
+        selectArtistLabel.classList.add("form__label");
         selectArtistLabel.textContent = "Artist: ";
         formFieldRow2.append(selectArtistLabel);
 
         const selectArtist = document.createElement("select");
         selectArtist.classList.add("form-album__select");
+        selectArtist.classList.add("form__data");
 
         fetch("http://localhost:8080/artists")
             .then(res => res.json())
@@ -80,6 +84,7 @@ module.exports = {
 
                     const selectArtistOption = document.createElement("option");
                     selectArtistOption.classList.add("form-album__select-option");
+                    selectArtistOption.classList.add("form__data");
                     selectArtistOption.value = data[index].id;
                     selectArtistOption.textContent = data[index].name;
                     selectArtist.append(selectArtistOption);
