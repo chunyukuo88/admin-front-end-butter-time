@@ -24,7 +24,7 @@ module.exports = {
                     contentRecord.append(albumTitle);
 
                     const albumArtist = document.createElement("div");
-                    albumArtist.innerHTML = data[index].artist;
+                    // albumArtist.innerHTML = data[index].artist;
                     albumArtist.classList.add("content-record-item");
                     contentRecord.append(albumArtist);
 
@@ -34,7 +34,16 @@ module.exports = {
                     contentRecord.append(albumId);
 
                     contentContainer.append(contentRecord);
-                }
+                
+                    fetch("http://localhost:8080/albums/" + data[index].id + "/get-artist")
+                    .then(res => res.json())
+                    .then(artist => {
+                        console.log(artist);
+                        albumArtist.innerHTML = artist.name;
+                    }
+                    )
+                
+                } //<-----The end of the for loop of the outer fetch() request
 
             })
 
