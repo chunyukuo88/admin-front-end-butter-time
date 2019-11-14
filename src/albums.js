@@ -7,6 +7,8 @@ module.exports = {
         contentContainer.innerHTML = "";
         const formContainer = document.querySelector(".form-container");
         formContainer.innerHTML = "";
+        document.querySelector(".add-button").hidden = true;
+        document.querySelector(".delete-button").hidden = true;
         fetch("http://localhost:8080/albums")
             .then(res => res.json())
             .then(function (data) {
@@ -34,14 +36,14 @@ module.exports = {
                     contentRecord.append(albumId);
 
                     contentContainer.append(contentRecord);
-                
+
                     fetch("http://localhost:8080/albums/" + data[index].id + "/get-artist")
-                    .then(res => res.json())
-                    .then(artist => {
-                        console.log(artist);
-                        albumArtist.innerHTML = artist.name;
-                    }
-                    )
+                        .then(res => res.json())
+                        .then(artist => {
+                            console.log(artist);
+                            albumArtist.innerHTML = artist.name;
+                        }
+                        )
                 } //<-----The end of the for loop of the outer fetch() request
 
             })
@@ -137,13 +139,12 @@ module.exports = {
                 })
                 .then(data => {
                     console.log(data);
+                })
+                .then(data => {
+                    this.renderAlbums();
                 });
-
-            this.renderAlbums();
 
         }
     }
-
-
 
 }

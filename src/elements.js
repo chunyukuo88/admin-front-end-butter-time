@@ -19,7 +19,12 @@ module.exports = {
             buttonElement.classList.add(buttonLowerCase + "-button");
             buttonGrid.append(buttonElement);
         });
+
         this.addButtonOnclicks();
+
+        document.querySelector(".add-button").hidden = true;
+        document.querySelector(".delete-button").hidden = true;
+        
     },
 
     addButtonOnclicks() {
