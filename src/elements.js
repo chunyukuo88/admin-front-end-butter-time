@@ -6,14 +6,18 @@ const wrapper = document.querySelector(".wrapper");
 module.exports = {
 
     createButtons() {
-        var buttons = ['Artists', 'Albums', 'Songs', 'Delete'];
+        const buttonGrid = document.createElement("article");
+        buttonGrid.classList.add("button-grid");
+        wrapper.append(buttonGrid);
+
+        var buttons = ['Artists', 'Albums', 'Songs', 'Add', 'Delete'];
         buttons.forEach(function (button) {
             const buttonLowerCase = button.toLowerCase();
             const buttonElement = document.createElement("button");
             buttonElement.innerHTML = button;
             buttonElement.classList.add("nav-button");
             buttonElement.classList.add(buttonLowerCase + "-button");
-            wrapper.append(buttonElement);
+            buttonGrid.append(buttonElement);
         });
         this.addButtonOnclicks();
     },
@@ -32,12 +36,21 @@ module.exports = {
         songsButtonElement.onclick = () => {
             songs.renderSongs();
         }
+
+        // const addButtonElement = document.querySelector(".add-button");
+        // songsButtonElement.onclick = () => {
+            // Surely Diana knows how to fix this!
+        // }
+
         const deleteButtonElement = document.querySelector(".delete-button");
         deleteButtonElement.onclick = () => {
-            this.deleteEntity();
+            let deleteConfirmation;
+            var confirmDeletion = confirm("Are you sure you want to delete the topmost entity?");
+            if (confirmDeletion == true) {
+                this.deleteEntity();
+            }
         }
     },
-
 
 
 
@@ -46,5 +59,6 @@ module.exports = {
         contentContainer.remove();
     }
 
+    
 
 }
