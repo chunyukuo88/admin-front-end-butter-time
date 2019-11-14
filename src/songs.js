@@ -91,18 +91,7 @@ module.exports = {
                     songNameLink.innerHTML = data[index].title;
 
                     songName.append(songNameLink);
-                    contentRecord.append(songName);
-
-                    // const albumName = document.createElement("div");
-                    // albumName.innerHTML = data[index].album;
-                    // albumName.classList.add("content-record-item");
-                    // contentRecord.append(albumName);
-
-                    // const songDuration = document.createElement("div");
-                    // songDuration.innerHTML = data[index].duration;
-                    // songDuration.classList.add("content-record-item");
-                    // contentRecord.append(songDuration);
-
+                    contentRecord.append(songName);   
                     contentContainer.append(contentRecord);
                 }
 
