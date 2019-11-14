@@ -6,14 +6,19 @@ const wrapper = document.querySelector(".wrapper");
 module.exports = {
 
     createButtons() {
-        var buttons = ['Artists', 'Albums', 'Songs', 'Delete'];
+        const buttonGrid = document.createElement("article");
+        buttonGrid.classList.add("button-grid");
+        wrapper.append(buttonGrid);
+
+
+        var buttons = ['Artists', 'Albums', 'Songs', 'Add', 'Delete'];
         buttons.forEach(function (button) {
             const buttonLowerCase = button.toLowerCase();
             const buttonElement = document.createElement("button");
             buttonElement.innerHTML = button;
             buttonElement.classList.add("nav-button");
             buttonElement.classList.add(buttonLowerCase + "-button");
-            wrapper.append(buttonElement);
+            buttonGrid.append(buttonElement);
         });
         this.addButtonOnclicks();
     },

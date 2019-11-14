@@ -42,7 +42,6 @@ module.exports = {
                         albumArtist.innerHTML = artist.name;
                     }
                     )
-                
                 } //<-----The end of the for loop of the outer fetch() request
 
             })

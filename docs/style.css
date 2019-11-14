@@ -31,6 +31,12 @@ button:hover {
   color: green;
 }
 
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(8, auto);
+  grid-gap: 10px;
+}
+
 .content-container {
   align-items: flex-start;
   display: flex;
