@@ -7,6 +7,7 @@ module.exports = {
         contentContainer.innerHTML = "";
         const formContainer = document.querySelector(".form-container");
         formContainer.innerHTML = "";
+
         document.querySelector(".add-button").hidden = true;
         document.querySelector(".delete-button").hidden = true;
         fetch("http://localhost:8080/songs")
@@ -88,9 +89,16 @@ module.exports = {
 
                                 formContainer.append(dropdown);
 
+                                const songsButtonElement = document.querySelector(".add-button");
+                                songsButtonElement.onclick = () => {
+                                    console.log("Add button clicked.");
+                                    formContainer.innerHTML = "";
+                                    // this.renderSongs();
+                                    document.querySelector(".songs-button").click();
+                                }
+
                             })
                     }
-
 
                     songNameLink.href = "http://localhost:8080/songs/" + data[index].id;
                     songNameLink.innerHTML = data[index].title;

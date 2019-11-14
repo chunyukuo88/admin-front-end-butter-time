@@ -42,11 +42,6 @@ module.exports = {
             songs.renderSongs();
         }
 
-        // const addButtonElement = document.querySelector(".add-button");
-        // songsButtonElement.onclick = () => {
-            // Surely Diana knows how to fix this!
-        // }
-
         const deleteButtonElement = document.querySelector(".delete-button");
         deleteButtonElement.onclick = () => {
             let deleteConfirmation;
@@ -57,13 +52,9 @@ module.exports = {
         }
     },
 
-
-
     deleteEntity() {
         const contentContainer = document.querySelector(".content-record");
         contentContainer.remove();
-    }
-
-    
+    }    
 
 }

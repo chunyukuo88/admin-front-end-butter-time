@@ -110,12 +110,11 @@ module.exports = {
                 .then(data => {
                     console.log(data);
                 })
-                .then(()=>{
+                .then(() => {
                     this.renderArtists()
                 }
 
                 );
-
 
         }
     }
