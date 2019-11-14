@@ -7,6 +7,8 @@ module.exports = {
         contentContainer.innerHTML = "";
         const formContainer = document.querySelector(".form-container");
         formContainer.innerHTML = "";
+        document.querySelector(".add-button").hidden = true;
+        document.querySelector(".delete-button").hidden = true;
         fetch("http://localhost:8080/songs")
             .then(res => res.json())
             .then(function (data) {
@@ -24,6 +26,9 @@ module.exports = {
                     songNameLink.href = "#";
                     songNameLink.onclick = (event) => {
                         event.preventDefault();
+                        document.querySelector(".add-button").hidden = false;
+                        document.querySelector(".delete-button").hidden = false;
+
                         fetch("http://localhost:8080/songs/" + data[index].id)
                             .then(res => res.json())
                             .then(function (songData) {
@@ -91,7 +96,7 @@ module.exports = {
                     songNameLink.innerHTML = data[index].title;
 
                     songName.append(songNameLink);
-                    contentRecord.append(songName);   
+                    contentRecord.append(songName);
                     contentContainer.append(contentRecord);
                 }
 
@@ -211,9 +216,12 @@ module.exports = {
                 })
                 .then(data => {
                     console.log(data);
+                })
+                .then(() => {
+                    this.renderSongs();
                 });
 
-            this.renderSongs();
+
 
         }
 

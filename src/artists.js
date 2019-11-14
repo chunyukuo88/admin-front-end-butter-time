@@ -7,6 +7,8 @@ module.exports = {
         contentContainer.innerHTML = "";
         const formContainer = document.querySelector(".form-container");
         formContainer.innerHTML = "";
+        document.querySelector(".add-button").hidden = true;
+        document.querySelector(".delete-button").hidden = true;
         fetch("http://localhost:8080/artists")
             .then(res => res.json())
             .then(function (data) {
@@ -107,9 +109,13 @@ module.exports = {
                 })
                 .then(data => {
                     console.log(data);
-                });
+                })
+                .then(()=>{
+                    this.renderArtists()
+                }
 
-            this.renderArtists();
+                );
+
 
         }
     }
