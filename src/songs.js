@@ -46,18 +46,26 @@ module.exports = {
                                 dropdownRecord.append(dataText);
                                 dropdown.append(dropdownRecord);
 
-                                // Ablum object is saved in H2 but not returning from endpoint.
-                                // const dataLabelAlbum = document.createElement("div");
-                                // dataLabelAlbum.classList.add("dropdown__data-label");
-                                // dataLabelAlbum.innerHTML = "Album Title: ";
-                                // dropdown.append(dataLabelAlbum);
+                                const dropdownRecord0 = document.createElement("div");
+                                dropdownRecord0.classList.add("content-record");
 
-                                // const dataTextAlbum = document.createElement("div");
-                                // dataTextAlbum.classList.add("dropdown__data-text");
-                                // console.log(songData);
-                                // // dataTextAlbum.innerHTML = songData.album.title;
-                                // dropdown.append(dataTextAlbum);
-                                // formContainer.append(dropdown);
+                                const dataLabelAlbum = document.createElement("div");
+                                dataLabelAlbum.classList.add("dropdown__data-label");
+                                dataLabelAlbum.innerHTML = "Album Title: ";
+                                dropdownRecord0.append(dataLabelAlbum);
+
+                                const dataTextAlbum = document.createElement("div");
+                                dataTextAlbum.classList.add("dropdown__data-text");
+
+                                fetch("http://localhost:8080/songs/" + songData.id + "/album")
+                                    .then(res => res.json())
+                                    .then(function (albumData) {
+                                        dataTextAlbum.innerHTML = albumData.title;
+                                    })
+
+                                dropdownRecord0.append(dataTextAlbum);
+                                dropdown.append(dropdownRecord0);
+                                formContainer.append(dropdown);
 
                                 const dropdownRecordDuration = document.createElement("div");
                                 dropdownRecordDuration.classList.add("content-record");
