@@ -10,6 +10,7 @@ font-family: 'Yeon Sung', cursive;
 
 :root {
   --butter: rgba(255, 251, 0, 0.972);
+  --brown-butter: brown;
   --dark: brown;
   --page_header: "Gloria Hallelujah", cursive;
   --page_title: "Julius Sans One", sans-serif;
