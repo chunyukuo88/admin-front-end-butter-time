@@ -44,16 +44,6 @@ module.exports = {
     },
 
 
-    // REFERENCE
-    // contentRecord.classList.add("content-record");
-
-    // const albumTitle = document.createElement("div");
-    // albumTitle.innerHTML = data[index].title;
-    // albumTitle.classList.add("content-record-item");
-    // albumTitle.classList.add("content-record-item-name");
-    // contentRecord.append(albumTitle);
-    // REFERENCE
-
 
 
     deleteEntity() {
