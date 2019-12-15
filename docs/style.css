@@ -41,8 +41,8 @@ button {
 button:hover {
   background-color: rgb(253, 255, 109);  
   color: green;
-  -webkit-transform: rotate(12deg);
-  transform: rotate(12deg);
+  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
 }
 
 .button-grid {
